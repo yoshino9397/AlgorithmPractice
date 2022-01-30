@@ -33,7 +33,7 @@ const containsDuplicate = function (nums) {
   }
   let map = {};
   for (let i = 0; i < nums.length; i++) {
-    const val = nums[i];
+    let val = nums[i];
     if (map[val]) {
       return true;
     } else {
