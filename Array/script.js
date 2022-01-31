@@ -97,9 +97,19 @@ console.log(maxProduct([2, 3, -2, 4]));
 ///Find Minimum in Rotated Sorted Array
 var findMin = function (nums) {
   ///Find minimum number
-  let min = Math.min(...nums)
-  return min
+  let min = Math.min(...nums);
+  return min;
   ////////////////////////
-  
 };
 console.log(findMin([4, 5, 6, 7, 0, 1, 2]));
+
+///Search in Rotated Sorted Array
+var search = function (nums, target) {
+  let val = nums.indexOf(target);
+  if (!val) {
+    return -1;
+  } else {
+    return val;
+  }
+};
+console.log(search([4, 5, 6, 7, 0, 1, 2],3));
