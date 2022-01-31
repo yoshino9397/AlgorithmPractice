@@ -31,7 +31,7 @@ const containsDuplicate = function (nums) {
   if (nums === null) {
     return false;
   }
-  let map = {};
+  let map = [];
   for (let i = 0; i < nums.length; i++) {
     let val = nums[i];
     if (map[val]) {
@@ -61,6 +61,22 @@ const productExceptSelf = function (nums) {
 console.log(productExceptSelf([1, 2, 3, 4]));
 
 ///Maximum Subarray
+const maxSubArray = function (nums) {
+  if (nums.length < 2) {
+    return nums[0];
+  }
+  let sum = 0;
+  let max = Infinity;
+
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i];
+    max = Math.max(sum, max);
+  }
+  return max;
+};
+console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+
+///Maximum Product Subarray
 const maxProduct = function (nums) {
   if (nums.length < 2) {
     return 0;
@@ -77,3 +93,13 @@ const maxProduct = function (nums) {
   return ans;
 };
 console.log(maxProduct([2, 3, -2, 4]));
+
+///Find Minimum in Rotated Sorted Array
+var findMin = function (nums) {
+  ///Find minimum number
+  let min = Math.min(...nums)
+  return min
+  ////////////////////////
+  
+};
+console.log(findMin([4, 5, 6, 7, 0, 1, 2]));
