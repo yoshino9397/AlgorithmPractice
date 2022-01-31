@@ -43,3 +43,37 @@ const containsDuplicate = function (nums) {
   return false;
 };
 console.log(containsDuplicate([7, 1, 5, 5]));
+
+///Product of Array Except Self
+const productExceptSelf = function (nums) {
+  let len = nums.length;
+  var output = Array(len).fill(1);
+  var left = 1;
+  var right = 1;
+  for (let i = 0; i < len - 1; i++) {
+    left *= nums[i];
+    right *= nums[len - i - 1];
+    output[i + 1] *= left;
+    output[len - i - 2] *= right;
+  }
+  return output;
+};
+console.log(productExceptSelf([1, 2, 3, 4]));
+
+///Maximum Subarray
+const maxProduct = function (nums) {
+  if (nums.length < 2) {
+    return 0;
+  }
+  var max = nums[0];
+  var ans = max;
+
+  for (let i = 1; i < nums.length; i++) {
+    var tmax = nums[i] * max;
+
+    max = Math.max(tmax, nums[i]);
+    ans = Math.max(ans, max);
+  }
+  return ans;
+};
+console.log(maxProduct([2, 3, -2, 4]));
