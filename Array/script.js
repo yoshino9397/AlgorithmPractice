@@ -95,7 +95,7 @@ const maxProduct = function (nums) {
 console.log(maxProduct([2, 3, -2, 4]));
 
 ///Find Minimum in Rotated Sorted Array
-var findMin = function (nums) {
+const findMin = function (nums) {
   ///Find minimum number
   let min = Math.min(...nums);
   return min;
@@ -104,7 +104,7 @@ var findMin = function (nums) {
 console.log(findMin([4, 5, 6, 7, 0, 1, 2]));
 
 ///Search in Rotated Sorted Array
-var search = function (nums, target) {
+const search = function (nums, target) {
   let val = nums.indexOf(target);
   if (!val) {
     return -1;
@@ -112,4 +112,42 @@ var search = function (nums, target) {
     return val;
   }
 };
-console.log(search([4, 5, 6, 7, 0, 1, 2],3));
+console.log(search([4, 5, 6, 7, 0, 1, 2], 3));
+
+///3Sum
+const threeSum = function (nums) {
+  if (nums == [] || nums == 0) {
+    return [];
+  }
+  nums.sort((a, b) => a - b);
+  ///昇順に並べ替えた
+  ///[-4, -1, -1, 0, 1, 2]
+
+  var len = nums.length;
+  var res = [];
+  var l = 0;
+  var r = 0;
+
+  for (let i = 0; i < len; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) {
+      continue;
+    }
+    l = i + 1;
+    r = len - 1;
+    while (l < r) {
+      if (nums[i] + nums[l] + nums[r] < 0) {
+        l++;
+      } else if (nums[i] + nums[l] + nums[r] > 0) {
+        r--;
+      } else {
+        res.push([nums[i], nums[l], nums[r]]);
+        while (l < r && nums[l] === nums[l + 1]) l++;
+        while (l < r && nums[r] === nums[r - 1]) r--;
+        l++;
+        r--;
+      }
+    }
+  }
+  return res;
+};
+console.log(threeSum([-1, 0, 1, 2, -1, -4]));
