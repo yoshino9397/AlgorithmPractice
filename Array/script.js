@@ -151,3 +151,22 @@ const threeSum = function (nums) {
   return res;
 };
 console.log(threeSum([-1, 0, 1, 2, -1, -4]));
+
+///Container With Most Water
+const maxArea = function (height) {
+  let right = height.length - 1;
+  let left = 0;
+  let maxVal = 0;
+  while (left < right) {
+    var contain = (right - left) * Math.min(height[left], height[right]);
+    maxVal = Math.max(contain, maxVal);
+
+    if (height[left] >= height[right]) {
+      right--;
+    } else {
+      left++;
+    }
+  }
+
+  return maxVal;
+};
