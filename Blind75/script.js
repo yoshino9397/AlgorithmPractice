@@ -64,6 +64,22 @@ console.log(isValid("()["));
 const mergeTwoLists = function (list1, list2) {
   let arr = [...list1, ...list2];
   arr.sort((a, b) => a - b);
-  return arr
+  return arr;
 };
 console.log(mergeTwoLists([1, 2, 4], [1, 3, 5]));
+
+/// 14,Maximum Subarray
+const maxSubArray = function (nums) {
+  var sum = 0;
+  var max = -Infinity;
+
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i];
+    max = Math.max(max, sum);
+    if (sum < 0) {
+      sum = 0;
+    }
+  }
+  return max;
+};
+console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
