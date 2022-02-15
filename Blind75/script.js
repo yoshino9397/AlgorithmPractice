@@ -83,3 +83,20 @@ const maxSubArray = function (nums) {
   return max;
 };
 console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+
+///20 Climbing Stairs
+var climbStairs = function (n) {
+  let n1 = 1;
+  let n2 = 1;
+
+  // n1 and n2 stands for how many ways it can reach n taking one step or two steps, such as n - 1 and n - 2
+  for (let i = 2; i <= n; i++) {
+    let ways = n1 + n2;
+    n1 = n2;
+    n2 = ways;
+  }
+
+  return n2;
+};
+
+console.log(climbStairs(6));
