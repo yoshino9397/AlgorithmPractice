@@ -16,10 +16,10 @@ const lengthOfLongestSubstring = function (s) {
   if (s.length < 2) {
     return s.length;
   }
-  var map = [];
-  var len = 0;
-  var maxLen = len;
-  var start = 0;
+  let map = [];
+  let len = 0;
+  let maxLen = len;
+  let start = 0;
 
   for (let i = start; i < s.length; i++) {
     c = s[i];
@@ -39,7 +39,7 @@ console.log(lengthOfLongestSubstring("pwwkew"));
 
 /// 7,Valid Parentheses
 const isValid = function (s) {
-  var stack = [];
+  let stack = [];
   for (let i = 0; i < s.length; i++) {
     let c = s[i];
     if (c == "{" || c == "(" || c == "[") {
@@ -70,8 +70,8 @@ console.log(mergeTwoLists([1, 2, 4], [1, 3, 5]));
 
 /// 14,Maximum Subarray
 const maxSubArray = function (nums) {
-  var sum = 0;
-  var max = -Infinity;
+  let sum = 0;
+  let max = -Infinity;
 
   for (let i = 0; i < nums.length; i++) {
     sum += nums[i];
@@ -85,7 +85,7 @@ const maxSubArray = function (nums) {
 console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
 
 ///20 Climbing Stairs
-var climbStairs = function (n) {
+let climbStairs = function (n) {
   let n1 = 1;
   let n2 = 1;
 
@@ -105,7 +105,7 @@ console.log(climbStairs(6));
 const isSameTree = (Array.prototype.equals = function (getArray) {
   if (this.length != getArray.length) return false;
 
-  for (var i = 0; i < getArray.length; i++) {
+  for (let i = 0; i < getArray.length; i++) {
     if (this[i] instanceof Array && getArray[i] instanceof Array) {
       if (!this[i].equals(getArray[i])) return false;
     } else if (this[i] != getArray[i]) {
@@ -114,8 +114,8 @@ const isSameTree = (Array.prototype.equals = function (getArray) {
   }
   return true;
 });
-var p = [1, 2, 3];
-var q = [1, 2, 3];
-var g = [1, 3, 2];
-var h = [1, null, 2];
-console.log("Comparing a1 and a2", p.equals(g));
+let p = [1, 2, 3];
+let q = [1, 2, 3];
+let g = [1, 3, 2];
+let h = [1, null, 2];
+console.log(p.equals(g));
