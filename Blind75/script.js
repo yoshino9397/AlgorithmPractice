@@ -102,21 +102,20 @@ var climbStairs = function (n) {
 console.log(climbStairs(6));
 
 ///26 Same tree
-var isSameTree = function (p, q) {
-  let arr1 = [];
-  let arr2 = [];
+const isSameTree = (Array.prototype.equals = function (getArray) {
+  if (this.length != getArray.length) return false;
 
-  for (let i = 0; i < p.length; i++) {
-    let a = p[i];
-    let b = q[i];
-    if (a === b) {
-      arr1.push(a);
-      return true;
-    }else{
+  for (var i = 0; i < getArray.length; i++) {
+    if (this[i] instanceof Array && getArray[i] instanceof Array) {
+      if (!this[i].equals(getArray[i])) return false;
+    } else if (this[i] != getArray[i]) {
       return false;
     }
   }
-  return false;
-};
-console.log(isSameTree([1, 2, 3], [1, 2, 3]));
-console.log(isSameTree([1, 2, 1], [1, 4, 2]));
+  return true;
+});
+var p = [1, 2, 3];
+var q = [1, 2, 3];
+var g = [1, 3, 2];
+var h = [1, null, 2];
+console.log("Comparing a1 and a2", p.equals(g));
