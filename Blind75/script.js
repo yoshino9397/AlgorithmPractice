@@ -100,3 +100,23 @@ var climbStairs = function (n) {
 };
 
 console.log(climbStairs(6));
+
+///26 Same tree
+var isSameTree = function (p, q) {
+  let arr1 = [];
+  let arr2 = [];
+
+  for (let i = 0; i < p.length; i++) {
+    let a = p[i];
+    let b = q[i];
+    if (a === b) {
+      arr1.push(a);
+      return true;
+    }else{
+      return false;
+    }
+  }
+  return false;
+};
+console.log(isSameTree([1, 2, 3], [1, 2, 3]));
+console.log(isSameTree([1, 2, 1], [1, 4, 2]));
