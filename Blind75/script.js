@@ -121,13 +121,13 @@ let h = [1, null, 2];
 console.log(p.equals(g));
 
 /// 28.Maximum Depth of Binary Tree
-var maxDepth = function (root) {
-  if (root === null) {
-    return 0;
-  }
-  return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
-};
-console.log(maxDepth([3, 9, 20, null, null, 15, 7]));
+// var maxDepth = function (root) {
+//   if (root === null) {
+//     return 0;
+//   }
+//   return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+// };
+// console.log(maxDepth([3, 9, 20, null, null, 15, 7]));
 
 /// 30.Best Time to Buy and Sell Stock
 var maxProfit = function (prices) {
@@ -143,3 +143,36 @@ var maxProfit = function (prices) {
   }
   return maxProfit;
 };
+
+/// 32.Valid Palindrome
+var isPalindrome = function (s) {
+  let lower = s.toLowerCase();
+  let a = lower.replace(/ /g, "").replace(/[^0-9a-z]/gi, "");
+  let sakasa = a.split("").reverse().join("");
+
+  if (a == sakasa) {
+    return true;
+  } else {
+    return false;
+  }
+};
+console.log(isPalindrome("A man, a plan, a canal: Panama"));
+
+/// 36.Linked List Cycle
+var hasCycle = function (head) {
+  let pos;
+  if (head.length < 0) {
+    return false;
+  } else if (head.length - 1 < pos) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+/// 40.Reverse Bits
+var reverseBits = function (n) {
+  let a = parseInt(n.toString(2).split("").reverse().join(""), 2);
+  return a;
+};
+console.log(reverseBits("11111111111111111111111111111101"));
