@@ -119,3 +119,27 @@ let q = [1, 2, 3];
 let g = [1, 3, 2];
 let h = [1, null, 2];
 console.log(p.equals(g));
+
+/// 28.Maximum Depth of Binary Tree
+var maxDepth = function (root) {
+  if (root === null) {
+    return 0;
+  }
+  return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+};
+console.log(maxDepth([3, 9, 20, null, null, 15, 7]));
+
+/// 30.Best Time to Buy and Sell Stock
+var maxProfit = function (prices) {
+  if (prices.length < 2) {
+    return 0;
+  }
+  let maxProfit = 0;
+  let maxStock = Math.max(prices[prices.length - 1], prices[prices.length - 2]);
+  for (let i = prices.length - 2; i > -1; i--) {
+    let profit = maxStock - profit[i];
+    maxStock = Math.max(maxStock, profit);
+    maxProfit = Math.max(maxProfit, profit);
+  }
+  return maxProfit;
+};
