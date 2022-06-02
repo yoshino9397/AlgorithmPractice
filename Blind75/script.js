@@ -144,7 +144,7 @@ var maxProfit = function (prices) {
   return maxProfit;
 };
 
-/// 32.Valid Palindrome
+/// 32id Palindrome
 var isPalindrome = function (s) {
   let lower = s.toLowerCase();
   let a = lower.replace(/ /g, "").replace(/[^0-9a-z]/gi, "");
@@ -176,3 +176,78 @@ var reverseBits = function (n) {
   return a;
 };
 console.log(reverseBits("11111111111111111111111111111101"));
+
+///41. Number of 1 Bits
+var hammingWeight = function (n) {
+  let array = Array.from(String(n), Number);
+  let weight = 1;
+  for (let i = 0; i < array.length; i++) {
+    weight += array[i];
+  }
+  return weight;
+};
+console.log(hammingWeight("101"));
+
+///44. Reverse Linked List
+var reverseList = function (head) {
+  let arr = [];
+  let num = head.reverse();
+  arr.push(num);
+  return arr[0];
+};
+console.log(reverseList([1, 2, 3, 4]));
+
+///50. Contains Duplicate
+var containsDuplicate = function (nums) {
+  for (let i = 0; i < nums.length; i++) {
+    nums[i] = nums[i + 1];
+    return true;
+  }
+  return false;
+};
+console.log(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2]));
+
+///51. Invert Binary Tree
+/// wakaran
+var invertTree = function (root) {
+  const reverseNode = (node) => {
+    if (node == null) {
+      return null;
+    }
+    reverseNode(node.left);
+    reverseNode(node.right);
+    let holdLeft = node.left;
+    node.left = node.right;
+    node.right = holdLeft;
+    return node;
+  };
+
+  return reverseNode(root);
+};
+console.log(invertTree([4, 2, 7, 1, 3, 6, 9]));
+
+///53. Lowest Common Ancestor of a Binary Search Tree
+// var lowestCommonAncestor = function (root, p, q) {
+//   const low = Math.min(p, q);
+//   ///2
+//   const high = Math.max(p, q);
+//   ///4
+//   let ancestor = null
+//   const aux = (node) => {
+//     if (!node) {
+//       return
+//     }
+//     if (node >= low && node <= high) {
+//       ancestor = node
+//     } else if (node <= low) {
+//       aux(node.right)
+//     } else {
+//       aux(node.left)
+//     }
+//   }
+//   aux(root)
+//   return ancestor
+// };
+// console.log(
+//   lowestCommonAncestor([6, 2, 8, 0, 4, 7, 9, null, null, 3, 5], 2, 4)
+// );
