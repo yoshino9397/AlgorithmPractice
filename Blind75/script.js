@@ -207,6 +207,13 @@ var containsDuplicate = function (nums) {
 };
 console.log(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2]));
 
+/** Binary Tree **/
+function TreeNode(val, left, right) {
+  this.val = val === undefined ? 0 : val;
+  this.left = left === undefined ? null : left;
+  this.right = right === undefined ? null : right;
+}
+
 ///51. Invert Binary Tree
 /// wakaran
 var invertTree = function (root) {
@@ -227,27 +234,26 @@ var invertTree = function (root) {
 console.log(invertTree([4, 2, 7, 1, 3, 6, 9]));
 
 ///53. Lowest Common Ancestor of a Binary Search Tree
-// var lowestCommonAncestor = function (root, p, q) {
-//   const low = Math.min(p, q);
-//   ///2
-//   const high = Math.max(p, q);
-//   ///4
-//   let ancestor = null
-//   const aux = (node) => {
-//     if (!node) {
-//       return
-//     }
-//     if (node >= low && node <= high) {
-//       ancestor = node
-//     } else if (node <= low) {
-//       aux(node.right)
-//     } else {
-//       aux(node.left)
-//     }
-//   }
-//   aux(root)
-//   return ancestor
-// };
-// console.log(
-//   lowestCommonAncestor([6, 2, 8, 0, 4, 7, 9, null, null, 3, 5], 2, 4)
-// );
+var lowestCommonAncestor = function (root, p, q) {
+  const low = Math.min(p.val, q.val);
+  const high = Math.max(p.val, q.val);
+  let ancestor = null;
+
+  const aux = (node) => {
+    if (!node) {
+      return;
+    }
+    if (node.val >= low && node.val <= high) {
+      ancestor = node;
+    } else if (node.val <= low) {
+      aux(node.right);
+    } else {
+      aux(node.left);
+    }
+  };
+  aux(root);
+  return ancestor;
+};
+console.log(
+  lowestCommonAncestor([6, 2, 8, 0, 4, 7, 9, null, null, 3, 5], 2, 4)
+);
