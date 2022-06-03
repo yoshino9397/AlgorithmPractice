@@ -257,3 +257,7 @@ var lowestCommonAncestor = function (root, p, q) {
 console.log(
   lowestCommonAncestor([6, 2, 8, 0, 4, 7, 9, null, null, 3, 5], 2, 4)
 );
+
+///56. Valid Anagram
+var isAnagram = function (s, t) {};
+console.log(isAnagram("rat", "car"));
