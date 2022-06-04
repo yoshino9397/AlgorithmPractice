@@ -259,5 +259,14 @@ console.log(
 );
 
 ///56. Valid Anagram
-var isAnagram = function (s, t) {};
+var isAnagram = function (s, t) {
+  let wordS = s.split("");
+  let wordT = t.split("");
+  if (wordS.length == wordT.length) {
+    for (let i = 0; i < wordS.length; i++) {
+      wordS[i] = wordT[1];
+    }
+  }
+  console.log(wordS);
+};
 console.log(isAnagram("rat", "car"));
