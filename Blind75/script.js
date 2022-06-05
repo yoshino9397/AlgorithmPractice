@@ -260,13 +260,37 @@ console.log(
 
 ///56. Valid Anagram
 var isAnagram = function (s, t) {
-  let wordS = s.split("");
-  let wordT = t.split("");
-  if (wordS.length == wordT.length) {
-    for (let i = 0; i < wordS.length; i++) {
-      wordS[i] = wordT[1];
+  var hash = {};
+
+  if (s === null || t === null || s.length !== t.length) {
+    return false;
+  } else {
+    for (i = 0; i < s.length; i++) {
+      var sval = s[i];
+      var tval = t[i];
+
+      if (hash[sval] === undefined) {
+        hash[sval] = 0;
+      }
+
+      if (hash[tval] === undefined) {
+        hash[tval] = 0;
+      }
+      hash[sval]++;
+      hash[tval]--;
     }
+
+    for (var j in hash) {
+      if (hash[j] !== 0) {
+        return false;
+      }
+    }
+
+    return true;
   }
-  console.log(wordS);
 };
 console.log(isAnagram("rat", "car"));
+
+///60. Missing Number
+var missingNumber = function (nums) {};
+console.log(missingNumber([9, 6, 4, 2, 3, 5, 7, 0, 1]));
