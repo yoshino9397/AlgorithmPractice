@@ -292,5 +292,16 @@ var isAnagram = function (s, t) {
 console.log(isAnagram("rat", "car"));
 
 ///60. Missing Number
-var missingNumber = function (nums) {};
+var missingNumber = function (nums) {
+  var res = 0;
+  console.log(5 ^ 6);
+  if (nums.length === null) {
+    return false;
+  } else {
+    for (var i = 1; i <= nums.length; i++) {
+      res = res ^ i ^ nums[i - 1];
+    }
+    return res;
+  }
+};
 console.log(missingNumber([9, 6, 4, 2, 3, 5, 7, 0, 1]));
