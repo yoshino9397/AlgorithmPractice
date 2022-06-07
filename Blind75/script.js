@@ -294,7 +294,6 @@ console.log(isAnagram("rat", "car"));
 ///60. Missing Number
 var missingNumber = function (nums) {
   var res = 0;
-  console.log(5 ^ 6);
   if (nums.length === null) {
     return false;
   } else {
@@ -305,3 +304,7 @@ var missingNumber = function (nums) {
   }
 };
 console.log(missingNumber([9, 6, 4, 2, 3, 5, 7, 0, 1]));
+
+///67. Counting Bits
+var countBits = function (n) {};
+console.log(countBits(5));
