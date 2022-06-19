@@ -289,7 +289,7 @@ var isAnagram = function (s, t) {
     return true;
   }
 };
-console.log(isAnagram("rat", "car"));
+console.log(isAnagram("cat", "car"));
 
 ///60. Missing Number
 var missingNumber = function (nums) {
