@@ -308,3 +308,7 @@ console.log(missingNumber([9, 6, 4, 2, 3, 5, 7, 0, 1]));
 ///67. Counting Bits
 var countBits = function (n) {};
 console.log(countBits(5));
+
+///
+var countBits = function (n) {};
+console.log(countBits(5));
