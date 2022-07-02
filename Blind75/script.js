@@ -306,9 +306,19 @@ var missingNumber = function (nums) {
 console.log(missingNumber([9, 6, 4, 2, 3, 5, 7, 0, 1]));
 
 ///67. Counting Bits
-var countBits = function (n) {};
+var countBits = function (num) {
+  var ans = [0];
+  for (let i = 1; i <= num; i++) {
+    ans[i] = (ans[i] || 0) + ans[i & (i - 1)] + 1;
+  }
+  return ans;
+};
 console.log(countBits(5));
 
-///
-var countBits = function (n) {};
-console.log(countBits(5));
+///７４. Subtree of Another Tree
+var isSubtree = function (s, t) {
+
+
+  
+};
+console.log(isSubtree([3, 4, 5, 1, 2], [4, 1, 2]));
