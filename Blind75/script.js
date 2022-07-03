@@ -1,3 +1,5 @@
+//////////////////////////////////////// easy ////////////////////////////////////////
+
 ///1,Two Sum
 const twoSum = function (nums, target) {
   let arr = [];
@@ -317,8 +319,30 @@ console.log(countBits(5));
 
 ///７４. Subtree of Another Tree
 var isSubtree = function (s, t) {
+  let treeMap = {};
+  changeTreeToString(s, true);
+  let str = changeTreeToString(t);
+  return treeMap[str] ? true : false;
 
-
-  
+  function changeTreeToString(node, setMap) {
+    if (!node) {
+      return "";
+    }
+    let str1 = changeTreeToString(node.left, setMap);
+    let str2 = changeTreeToString(node.right, setMap);
+    let str3 =
+      node.val +
+      (str1.length ? "/" + str1 : "") +
+      (str2.length ? "/" + str2 : "");
+    if (setMap) {
+      treeMap[str1] = true;
+      treeMap[str2] = true;
+      treeMap[str3] = true;
+    }
+    return str3;
+  }
 };
-console.log(isSubtree([3, 4, 5, 1, 2], [4, 1, 2]));
+console.log(isEqual([3, 4, 5, 1, 2], [4, 1, 2]));
+
+
+//////////////////////////////////////// medium ////////////////////////////////////////
