@@ -342,7 +342,135 @@ var isSubtree = function (s, t) {
     return str3;
   }
 };
-console.log(isEqual([3, 4, 5, 1, 2], [4, 1, 2]));
-
+console.log(isSubtree([3, 4, 5, 1, 2], [4, 1, 2]));
 
 //////////////////////////////////////// medium ////////////////////////////////////////
+
+//// 3.Longest Palindromic Substring
+var longestPalindrome = function (string) {
+  let longestPal = "";
+
+  var getLongestPalindrome = function (leftPosition, rightPosition) {
+    // While there is space to expand, and the expanded strings match
+    while (
+      leftPosition >= 0 &&
+      rightPosition < string.length &&
+      string[leftPosition] === string[rightPosition]
+    ) {
+      // Expand in each direction.
+      leftPosition--;
+      rightPosition++;
+    }
+
+    // Store the longest palindrom (if it's the longest one found so far)
+    if (rightPosition - leftPosition > longestPal.length) {
+      longestPal = string.slice(leftPosition + 1, rightPosition);
+    }
+  };
+
+  // Loop through the letters
+  for (let i = 0; i < string.length; i++) {
+    // Find the longest odd palendrome
+    getLongestPalindrome(i, i + 1);
+    // Find the longest even palendrome
+    getLongestPalindrome(i, i);
+
+    // Check if a longer palindrome cannot be found
+    if ((string.length - i) * 2 < longestPal.length) {
+      // Break out to avoid unnecessary computation
+      break;
+    }
+  }
+  return longestPal;
+};
+console.log(longestPalindrome("babad"));
+
+/// 4.Container With Most Water
+var maxArea = function (height) {
+  let left = 0;
+  let right = height.length - 1;
+  let max = 0;
+
+  while (left < right) {
+    let contain = (right - left) * Math.min(height[left], height[right]);
+    max = Math.max(contain, max);
+    if (height[left] >= height[right]) {
+      right--;
+    } else {
+      left++;
+    }
+  }
+  return max;
+};
+console.log(maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+
+/// 5.3Sum
+var threeSum = function (nums) {
+  let result = [];
+  if (nums.length === 0 || nums.length < 3) {
+    return result;
+  }
+  nums.sort(function (a, b) {
+    return a > b ? 1 : -1;
+  });
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    if (i === 0 || nums[i] > nums[i - 1]) {
+      var target = 0 - nums[i];
+
+      j = i + 1;
+      k = nums.length - 1;
+
+      while (j < k) {
+        if (nums[j] + nums[k] === target) {
+          result.push([nums[i], nums[j], nums[k]]);
+          j++;
+          k--;
+          while (j < k && nums[j] === nums[j - 1]) {
+            j++;
+          }
+          while (j < k && nums[k] === nums[k + 1]) {
+            k--;
+          }
+        } else if (nums[j] + nums[k] < target) {
+          j++;
+        } else {
+          k--;
+        }
+      }
+    }
+  }
+  return result;
+};
+console.log(threeSum([-1, 0, 1, 2, -1, -4]));
+
+/// 7.Remove Nth Node From End of List
+var removeNthFromEnd = function (head, n) {
+  let index = n - 1;
+  if (index > -1) {
+    head.reverse().splice(index, 1);
+  }
+  return head.reverse();
+};
+console.log(removeNthFromEnd([5, 6, 7, 8, 9], 2));
+
+///10.Search in Rotated Sorted Array
+var search = function (nums, target) {
+  if (nums.length < 2 || nums.includes(target) == false) {
+    return -1;
+  } else if (target === 0) {
+    return nums[0];
+  } else {
+    const isTarget = (element) => element === target;
+    let order = nums.findIndex(isTarget);
+    for (let i = 0; i < target + 1; i++) {
+      nums.push(nums.shift());
+    }
+    let result = nums[order];
+    return result;
+  }
+};
+console.log(search([4, 5, 6, 7, 0, 1, 2], 0));
+
+///11.Combination Sum
+var combinationSum = function (candidates, target) {};
