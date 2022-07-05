@@ -473,4 +473,58 @@ var search = function (nums, target) {
 console.log(search([4, 5, 6, 7, 0, 1, 2], 0));
 
 ///11.Combination Sum
-var combinationSum = function (candidates, target) {};
+var combinationSum = function (candidates, target) {
+  let result = [];
+  let output = [];
+
+  if (candidates === null || candidates.length === 0) {
+    return result;
+  }
+  candidates.sort(function (a, b) {
+    return a > b ? 1 : -1;
+  });
+  generate(candidates, result, output, target, 0);
+
+  return result;
+};
+
+var generate = function (candidates, result, output, target, index) {
+  if (target === 0) {
+    result.push(output.slice());
+  }
+  if (target < 0) {
+    return;
+  }
+
+  for (var i = index; i < candidates.length; i++) {
+    if (i > index && candidates[i] === candidates[i - 1]) {
+      continue;
+    }
+
+    if (candidates[i] <= target) {
+      output.push(candidates[i]);
+      generate(candidates, result, output, target - candidates[i], i);
+      output.pop();
+    }
+  }
+};
+console.log(combinationSum([2, 3, 5], 8));
+
+/// 12.Rotate Image
+var rotate = function (matrix) {
+  let result = [];
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix.length; j++) {
+      result.push(matrix[i].splice(j, 1));
+    }
+  }
+  let arr = result.reverse();
+  return arr;
+};
+console.log(
+  rotate([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+  ])
+);
