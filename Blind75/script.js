@@ -70,22 +70,6 @@ const mergeTwoLists = function (list1, list2) {
 };
 console.log(mergeTwoLists([1, 2, 4], [1, 3, 5]));
 
-/// 14,Maximum Subarray
-const maxSubArray = function (nums) {
-  let sum = 0;
-  let max = -Infinity;
-
-  for (let i = 0; i < nums.length; i++) {
-    sum += nums[i];
-    max = Math.max(max, sum);
-    if (sum < 0) {
-      sum = 0;
-    }
-  }
-  return max;
-};
-console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
-
 ///20 Climbing Stairs
 let climbStairs = function (n) {
   let n1 = 1;
@@ -510,7 +494,6 @@ var generate = function (candidates, result, output, target, index) {
 };
 console.log(combinationSum([2, 3, 5], 8));
 
-
 /// 12.Rotate Image
 var rotate = function (matrix) {
   rotateDiagonal(matrix);
@@ -523,7 +506,6 @@ var swap = function (matrix, x1, y1, x2, y2) {
 };
 var rotateRow = function (matrix) {
   for (var i = 0; i < matrix.length; i++) {
-    var row = matrix[i];
     var start = 0;
     var end = matrix[i].length - 1;
 
@@ -542,10 +524,110 @@ var rotateDiagonal = function (matrix) {
   }
 };
 
-console.log(
-  rotate([
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-  ])
-);
+/// 13.Group Anagrams
+var sort = function (s) {
+  var arr = s.split("");
+  arr.sort((a, b) => (a > b ? 1 : -1));
+  return arr.join("");
+};
+///文字列の中でアルファベット順に直す式
+var groupAnagrams = function (strs) {
+  var hash = {};
+  for (var i = 0; i < strs.length; i++) {
+    var str = strs[i];
+    var key = sort(str);
+
+    hash[key] = hash[key] || [];
+    hash[key].push(str);
+  }
+  var result = [];
+  for (i in hash) {
+    result.push(hash[i]);
+  }
+  return result;
+};
+console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]));
+
+/// 14,Maximum Subarray
+const maxSubArray = function (nums) {
+  let sum = 0;
+  let max = -Infinity;
+
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i];
+    max = Math.max(max, sum);
+    if (sum < 0) {
+      sum = 0;
+    }
+  }
+  return max;
+};
+console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+
+/// 15. Spiral Matrix
+var spiralOrder = function (matrix) {
+  var result = [];
+
+  if (matrix === null || matrix.length === 0 || matrix[0].length === 0) {
+    return result;
+  }
+
+  var rows = matrix.length;
+  var cols = matrix[0].length;
+
+  var x = 0;
+  var y = 0;
+
+  while (rows > 0 && cols > 0) {
+    if (rows === 1) {
+      for (var i = 0; i < cols; i++) {
+        result.push(matrix[x][y++]);
+      }
+      break;
+    } else if (cols === 1) {
+      for (i = 0; i < rows; i++) {
+        result.push(matrix[x++][y]);
+      }
+      break;
+    }
+
+    for (i = 0; i < cols - 1; i++) {
+      result.push(matrix[x][y++]);
+    }
+    for (i = 0; i < rows - 1; i++) {
+      result.push(matrix[x++][y]);
+    }
+    for (i = 0; i < cols - 1; i++) {
+      result.push(matrix[x][y--]);
+    }
+    for (i = 0; i < rows - 1; i++) {
+      result.push(matrix[x--][y]);
+    }
+
+    x++;
+    y++;
+    cols -= 2;
+    rows -= 2;
+  }
+  return result;
+};
+
+///16.Jump Game
+var canJump = function (nums) {
+  var numLeft = nums[0];
+  for (var i = 1; i < nums.length; i++) {
+    numLeft--;
+    if (numLeft < 0) {
+      return false;
+    }
+    numLeft = Math.max(nums[i], numLeft);
+  }
+  return true;
+};
+console.log(canJump([2, 2, 0, 4, 4]));
+
+
+///17.Merge Intervals
+var merge = function(intervals) {
+    
+};
