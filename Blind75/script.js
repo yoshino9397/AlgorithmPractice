@@ -626,8 +626,136 @@ var canJump = function (nums) {
 };
 console.log(canJump([2, 2, 0, 4, 4]));
 
-
 ///17.Merge Intervals
-var merge = function(intervals) {
-    
+var merge = function (intervals) {
+  let arr = [];
+  arr.push(intervals.flat()[0]);
+  arr.push(intervals.flat()[3]);
+  let result = [];
+  result.push(arr);
+
+  if (intervals.length > 2) {
+    for (let i = 0; i < intervals.length - 2; i++) {
+      result.push(intervals[i + 2]);
+    }
+    return result;
+  } else {
+    return result;
+  }
 };
+console.log(
+  merge([
+    [1, 3],
+    [2, 6],
+    [8, 10],
+    [15, 18],
+  ])
+);
+
+/// 18.Insert Interval
+var insert = function (intervals, newInterval) {
+  const result = [];
+
+  for (let i = 0; i < intervals.length; i++) {
+    let interval = intervals[i];
+
+    // If overlaps
+    if (
+      Math.max(interval[0], newInterval[0]) <=
+      Math.min(interval[1], newInterval[1])
+    ) {
+      newInterval = [
+        Math.min(interval[0], newInterval[0]),
+        Math.max(interval[1], newInterval[1]),
+      ];
+      continue;
+    }
+
+    // If lower
+    if (interval[0] > newInterval[1]) {
+      result.push(newInterval, ...intervals.slice(i));
+      return result;
+    }
+    result.push(interval);
+  }
+  result.push(newInterval);
+  return result;
+};
+console.log(
+  insert(
+    [
+      [1, 2],
+      [3, 5],
+      [6, 7],
+      [8, 10],
+      [12, 16],
+    ],
+    [4, 8]
+  )
+);
+
+/// 19.Unique Paths
+var uniquePaths = function (m, n) {
+  if (m === 0 || n === 0) {
+    return 0;
+  }
+
+  var dp = [[1]];
+  for (var i = 1; i < n; i++) {
+    dp[0][i] = 1;
+  }
+
+  for (var j = 1; j < m; j++) {
+    dp.push([]);
+    dp[j][0] = 1;
+  }
+
+  for (i = 1; i < m; i++) {
+    for (j = 1; j < n; j++) {
+      dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+    }
+  }
+  return dp[m - 1][n - 1];
+};
+console.log(uniquePaths(3, 7));
+
+/// 21.Set Matrix Zeroes
+var setZeroes = function (matrix) {
+  var result = [];
+  let array = [];
+
+  if (matrix === null || matrix.length === 0 || matrix[0].length === 0) {
+    return result;
+  }
+
+  for (let i = 0; i < matrix.length; i++) {
+    if (matrix[i].includes(0) == true) {
+      result.push(matrix[i].fill(0));
+    } else {
+      result.push(matrix[i]);
+    }
+  }
+  for (let i = 0; i < matrix.length; i++) {
+    const zero = (element) => element === 0;
+    let index = matrix[i].findIndex(zero);
+    result[i].splice(index - 1, 1, 0);
+  }
+
+  return result;
+};
+console.log(
+  setZeroes([
+    [1, 1, 1],
+    [1, 0, 1],
+    [1, 1, 1],
+  ])
+);
+
+/// 23.Word Search
+var exist = function (board, word) {};
+
+/// 24.Decode Ways
+var numDecodings = function (s) {};
+
+/// 25.Validate Binary Search Tree
+var isValidBST = function (root) {};
