@@ -752,10 +752,200 @@ console.log(
 );
 
 /// 23.Word Search
-var exist = function (board, word) {};
+var exist = function (board, word) {
+  var hash = {};
+
+  for (var i = 0; i < board.length; i++) {
+    for (var j = 0; j < board[0].length; j++) {
+      if (dfs(board, word, 0, i, j)) {
+        return true;
+      }
+    }
+  }
+
+  function dfs(board, word, w, i, j) {
+    var key = i + "," + j;
+    if (hash[key]) {
+      return false;
+    }
+    if (w === word.length) {
+      return true;
+    }
+    if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) {
+      return false;
+    }
+
+    var result = false;
+
+    if (word[w] === board[i][j]) {
+      hash[key] = true;
+
+      result =
+        dfs(board, word, w + 1, i + 1, j) ||
+        dfs(board, word, w + 1, i - 1, j) ||
+        dfs(board, word, w + 1, i, j + 1) ||
+        dfs(board, word, w + 1, i, j - 1);
+
+      hash[key] = false;
+    }
+    return result;
+  }
+  return false;
+};
+console.log(
+  exist(
+    [
+      ["A", "B", "C", "E"],
+      ["S", "F", "C", "S"],
+      ["A", "D", "E", "E"],
+    ],
+    "ABCCED"
+  )
+);
 
 /// 24.Decode Ways
-var numDecodings = function (s) {};
+var numDecodings = function (s) {
+  let arr = [];
+  arr.push(s.split("").map(Number));
+
+  if (arr.includes(0) === true) {
+    return 0;
+  }
+  var nums = [1, 1];
+
+  for (var i = 2; i <= s.length; i++) {
+    var tmp;
+
+    tmp = parseInt(s.substring(i - 1, i));
+
+    if (tmp === 0) {
+      nums[i] = 0;
+    } else {
+      nums[i] = nums[i - 1];
+    }
+
+    if (s[i - 2] !== "0") {
+      tmp = parseInt(s.substring(i - 2, i));
+
+      if (0 < tmp && tmp <= 26) {
+        nums[i] += nums[i - 2];
+      }
+    }
+  }
+  return nums[s.length];
+};
+console.log(numDecodings("226"));
 
 /// 25.Validate Binary Search Tree
-var isValidBST = function (root) {};
+const helper = (root, min, max) => {
+  if (!root) {
+    return true; // We hit the end of the path
+  }
+  if ((min !== null && root.val <= min) || (max !== null && root.val >= max)) {
+    return false;
+  }
+  // Continue to scan left and right
+  return helper(root.left, min, root.val) && helper(root.right, root.val, max);
+};
+var isValidBST = function (root) {
+  if (!root) {
+    return false;
+  }
+  return helper(root, null, null);
+};
+console.log(isValidBST([5, 1, 4, null, null, 3, 6]));
+
+/// 27 Binary Tree Level Order Traversal
+var levelOrder = function (root) {
+  var result = [];
+
+  if (root === null) {
+    return result;
+  }
+  var queue = [];
+  var temp = [];
+  var curLvlCnt = 1;
+  var nextLvlCnt = 0;
+  queue.push(root);
+
+  while (queue.length !== 0) {
+    var p = queue.shift();
+    temp.push(p.val);
+    curLvlCnt--;
+
+    if (p.left) {
+      queue.push(p.left);
+      nextLvlCnt++;
+    }
+    if (p.right) {
+      queue.push(p.right);
+      nextLvlCnt++;
+    }
+    if (curLvlCnt === 0) {
+      result.push(temp);
+      curLvlCnt = nextLvlCnt;
+      nextLvlCnt = 0;
+      temp = [];
+    }
+  }
+  return result;
+};
+console.log(levelOrder([3, 9, 20, null, null, 15, 7]));
+
+/// 29.Construct Binary Tree from Preorder and Inorder Traversal
+var buildTree = function (preorder, inorder) {
+  if (!preorder || !inorder) {
+    return null;
+  }
+
+  if (preorder.length !== inorder.length) {
+    return null;
+  }
+
+  return generate(
+    preorder,
+    0,
+    preorder.length - 1,
+    inorder,
+    0,
+    inorder.length - 1
+  );
+};
+
+var generate = function (preorder, pl, pr, inorder, il, ir) {
+  if (pl > pr || il > ir) {
+    return null;
+  }
+  var root = new TreeNode(preorder[pl]);
+  var midIndex = -1;
+
+  for (var i = 0; i < inorder.length; i++) {
+    if (inorder[i] === preorder[pl]) {
+      midIndex = i;
+      break;
+    }
+  }
+  if (midIndex === -1) {
+    return null;
+  }
+  var left = generate(
+    preorder,
+    pl + 1,
+    pl + (midIndex - il),
+    inorder,
+    il,
+    midIndex - 1
+  );
+  var right = generate(
+    preorder,
+    pl + (midIndex - il) + 1,
+    pr,
+    inorder,
+    midIndex + 1,
+    ir
+  );
+  root.left = left;
+  root.right = right;
+  return root;
+};
+console.log(buildTree([3, 9, 20, 15, 7], [9, 3, 15, 20, 7]));
