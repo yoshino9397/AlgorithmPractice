@@ -949,3 +949,41 @@ var generate = function (preorder, pl, pr, inorder, il, ir) {
   return root;
 };
 console.log(buildTree([3, 9, 20, 15, 7], [9, 3, 15, 20, 7]));
+
+/// 33.Longest Consecutive Sequence
+var longestConsecutive = function (nums) {
+  let arr = nums.sort((a, b) => a - b);
+  let count = 1;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] + 1 === arr[i + 1]) {
+      count++;
+    }
+  }
+  return count;
+};
+console.log(longestConsecutive([100, 4, 200, 1, 3, 2]));
+
+/// 35.Word Break
+var wordBreak = function (s, wordDict) {
+  if (wordDict === null || wordDict.size === 0) {
+    return false;
+  }
+  var possible = [];
+  possible[0] = true;
+
+  for (var i = 0; i < s.length; i++) {
+    if (possible[i]) {
+      for (var j = i + 1; j <= s.length; j++) {
+        var str = s.substring(i, j);
+        if (wordDict.includes(str)) {
+          possible[j] = true;
+        }
+      }
+    }
+  }
+  return possible[s.length] === true;
+};
+console.log(wordBreak("applepenapple", ["apple", "pen"]));
+
+/// 37.Reorder List
+var reorderList = function (head) {};
