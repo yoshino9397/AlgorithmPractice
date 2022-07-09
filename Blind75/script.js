@@ -986,4 +986,53 @@ var wordBreak = function (s, wordDict) {
 console.log(wordBreak("applepenapple", ["apple", "pen"]));
 
 /// 37.Reorder List
-var reorderList = function (head) {};
+function ListNode(val, next) {
+  this.val = val === undefined ? 0 : val;
+  this.next = next === undefined ? null : next;
+}
+
+var reorderList = function (head) {
+  let arr = [];
+  let cur = head;
+
+  while (cur) {
+    arr.push(cur);
+    cur = cur.next;
+  }
+
+  let size = arr.length;
+  let half = Math.floor(size / 2);
+  cur = head;
+
+  for (let i = 0; i < half; i++) {
+    let nextFromEnd = arr[size - i - 1];
+    arr[size - i - 2].next = null;
+    let next = cur.next;
+    cur.next = nextFromEnd;
+    nextFromEnd.next = next;
+    cur = next;
+  }
+};
+
+/// 38.Maximum Product Subarray
+var maxProduct = function (nums) {
+  let num = 1;
+  let max = -Infinity;
+
+  for (let i = 0; i < nums.length - 1; i++) {
+    num *= nums[i];
+    max = Math.max(max, num);
+  }
+  return max;
+};
+console.log(maxProduct([2, 3, -2, 4]));
+
+/// 39.Find Minimum in Rotated Sorted Array
+var findMin = function (nums) {
+  let arr = nums.sort((a, b) => a - b);
+  return arr[0];
+};
+console.log(findMin([3, 4, 5, 1, 2]));
+
+/// 42.House Robber
+var rob = function (nums) {};
