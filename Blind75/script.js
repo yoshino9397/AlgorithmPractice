@@ -1035,4 +1035,78 @@ var findMin = function (nums) {
 console.log(findMin([3, 4, 5, 1, 2]));
 
 /// 42.House Robber
-var rob = function (nums) {};
+var rob = function (nums) {
+  let sum = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (i % 2 === 0) {
+      sum += nums[i];
+    }
+  }
+  return sum;
+};
+console.log(rob([2, 7, 9, 3, 1]));
+
+/// 43.Number of Islands
+var numIslands = function (grid) {
+  var count = 0;
+
+  const traverseIsland = (i, j, grid) => {
+    var stack = [];
+
+    stack.push([i, j]);
+
+    while (stack.length) {
+      var pair = stack.pop();
+      i = pair[0];
+      j = pair[1];
+
+      if (
+        i >= 0 &&
+        i < grid.length &&
+        j >= 0 &&
+        j < grid[0].length &&
+        grid[i][j] === "1"
+      ) {
+        grid[i][j] = "2";
+        stack.push([i + 1, j]);
+        stack.push([i - 1, j]);
+        stack.push([i, j + 1]);
+        stack.push([i, j - 1]);
+      }
+    }
+  };
+
+  for (var i = 0; i < grid.length; i++) {
+    for (var j = 0; j < grid[0].length; j++) {
+      if (grid[i][j] === "1") {
+        traverseIsland(i, j, grid);
+        count++;
+      }
+    }
+  }
+  return count;
+};
+
+/// 45.Course Schedule
+var canFinish = function (numCourses, prerequisites) {
+  let len = prerequisites.flat().length;
+  if (len > numCourses) {
+    return false;
+  }
+  for (let i = 0; i < prerequisites.length; i++) {
+    if (prerequisites[i] !== prerequisites[i].sort((a, b) => a - b)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+};
+console.log(
+  canFinish(2, [
+    [1, 0],
+    [0, 1],
+  ])
+);
+
+/// 46.Implement Trie (Prefix Tree)
+
