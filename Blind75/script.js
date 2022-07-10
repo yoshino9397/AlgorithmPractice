@@ -1109,4 +1109,54 @@ console.log(
 );
 
 /// 46.Implement Trie (Prefix Tree)
+var Trie = function (commands, lists) {
+  let arr = [];
 
+  for (let i = 1; i < lists.length; i++) {
+    lists[0].push(lists[i]);
+  }
+
+  for (let i = 1; i < lists.length; i++) {
+    if (commands[i] === "insert" && lists[0].includes(lists[i]) == false) {
+      arr.push(null);
+    }
+    if (commands[i] === "search" && lists[0].includes(lists[i]) == true) {
+      arr.push(true);
+    } else {
+      arr.push(false);
+    }
+    if (commands[i] === "startsWith" && lists[0].includes(lists[i])) {
+      arr.push(true);
+    } else {
+      arr.push(false);
+    }
+  }
+  return arr;
+};
+console.log(
+  Trie(
+    ["Trie", "insert", "search", "search", "startsWith", "insert", "search"],
+    [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+  )
+);
+
+/// 49.House Robber II
+var rob2 = function (nums) {
+  let sum = 0;
+  if (nums.length % 2 === 0) {
+    for (let i = 0; i < nums.length; i++) {
+      if (i % 2 === 0) {
+        sum += nums[i];
+      }
+    }
+    return sum;
+  } else {
+    for (let i = 0; i < nums.length; i++) {
+      if (i % 2 === 1) {
+        sum += nums[i];
+      }
+    }
+    return sum;
+  }
+};
+console.log(rob2([1, 2, 3, 1]));
