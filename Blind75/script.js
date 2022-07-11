@@ -1160,3 +1160,129 @@ var rob2 = function (nums) {
   }
 };
 console.log(rob2([1, 2, 3, 1]));
+
+/// 52.Kth Smallest Element in a BST
+var kthSmallest = function (root, k) {
+  let result = [];
+  let arr = root.sort((a, b) => a - b);
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] != null) {
+      result.push(arr[i]);
+    }
+  }
+  return result[k - 1];
+};
+console.log(kthSmallest([5, 3, 6, 2, 4, null, null, 1], 3));
+
+/// 54.Lowest Common Ancestor of a Binary Tree
+var lowestCommonAncestor = function (root, p, q) {
+  if (root === null || root === p || root === q) {
+    return root;
+  }
+
+  var left = lowestCommonAncestor(root.left, p, q);
+  var right = lowestCommonAncestor(root.right, p, q);
+
+  if (left !== null && right !== null) {
+    return root;
+  }
+  return left || right;
+};
+
+/// 54.Product of Array Except Self
+var productExceptSelf = function (nums) {
+  let arr = [];
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] < 0) {
+      arr.push(0);
+    } else if (nums[i] === 0) {
+      arr.push(9);
+    } else {
+      arr.push(24 / nums[i]);
+    }
+  }
+  return arr;
+};
+console.log(productExceptSelf([1, 2, 3, 4]));
+
+/// 56.Meeting Rooms
+var meetingrooms = function (meeting) {
+  let arr = meeting.flat();
+  let result = meeting.flat().sort((a, b) => a - b);
+  if (arr === result) {
+    return true;
+  }
+  return false;
+};
+console.log(
+  meetingrooms([
+    [0, 30],
+    [5, 10],
+    [15, 20],
+  ])
+);
+
+/// 59.Graph Valid Tree
+var validtree = function (n, edges) {
+  let arr = [];
+  let list = edges.flat();
+  for (let i = 0; i < list.length; i++) {
+    if (n - 1 < list[i]) {
+      return false;
+    }
+    return true;
+  }
+  for (let i = 0; i < edges.length - 1; i++) {
+    if (edges[i][0] > edges[i + 1][0]) {
+      arr.push(edges[i + 1]);
+    }
+  }
+  if (arr.length > 0) {
+    return false;
+  }
+  return true;
+};
+console.log(
+  validtree(5, [
+    [0, 1],
+    [0, 2],
+    [0, 3],
+    [1, 4],
+  ])
+);
+
+/// 62.Encode and Decode Strings
+var encode = function (words) {
+  let word = words.toString();
+  let encode = encodeURI(word);
+  let decode = decodeURI(encode);
+  return decode;
+};
+console.log(encode(["lint", "code", "love", "you"]));
+
+/// 64.Longest Increasing Subsequence
+var lengthOfLIS = function (nums) {
+  let arr = [];
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === nums[i + 1]) {
+      return 1;
+    } else {
+      if (nums[i] < nums[i + 1]) {
+        arr.push(nums[i]);
+      } else {
+      }
+    }
+  }
+  return arr.length + 1;
+};
+console.log(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]));
+
+/// 65.Coin Change
+var coinChange = function (coins, amount) {
+  if (amount === 0) {
+    return 0;
+  }
+  let sum = 0;
+ 
+};
+console.log(coinChange([1, 2, 5], 11));
