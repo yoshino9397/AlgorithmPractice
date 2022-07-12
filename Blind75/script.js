@@ -1279,10 +1279,68 @@ console.log(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]));
 
 /// 65.Coin Change
 var coinChange = function (coins, amount) {
-  if (amount === 0) {
-    return 0;
+  var dp = [0];
+  for (var i = 1; i <= amount; i++) {
+    dp.push(-1);
   }
-  let sum = 0;
- 
+
+  for (var i = 0; i < amount; i++) {
+    if (dp[i] < 0) {
+      continue;
+    }
+    for (var j = 0; j < coins.length; j++) {
+      var coin = coins[j];
+
+      if (i + coin > amount) {
+        continue;
+      }
+      if (dp[i + coin] < 0) {
+        dp[i + coin] = dp[i] + 1;
+      }
+    }
+  }
+  return dp[amount];
 };
 console.log(coinChange([1, 2, 5], 11));
+
+/// 66.Number of Connected Components in an Undirected Graph
+var countComponents = function (n, edges) {
+  const parent = new Array(n).fill(0).map((x, index) => index);
+
+  const root = (a) => {
+    while (a !== parent[a]) {
+      parent[a] = parent[parent[a]];
+      a = parent[a];
+    }
+    return a;
+  };
+
+  let size = n;
+  const union = (a, b) => {
+    const rootA = root(a);
+    const rootB = root(b);
+    if (rootA !== rootB) {
+      size -= 1;
+      parent[rootA] = rootB;
+    }
+  };
+
+  edges.forEach(([a, b]) => {
+    union(a, b);
+  });
+  return size;
+};
+console.log(
+  countComponents(5, [
+    [0, 1],
+    [1, 2],
+    [3, 4],
+    [5, 4],
+  ])
+);
+
+/// 68.Top K Frequent Elements
+var topKFrequent = function (nums, k) {
+  
+};
+console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2));
