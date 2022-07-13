@@ -1341,6 +1341,56 @@ console.log(
 
 /// 68.Top K Frequent Elements
 var topKFrequent = function (nums, k) {
-  
+  let hashMap = {};
+  let result = [];
+
+  for (let num of nums) {
+    if (hashMap[num]) {
+      hashMap[num]++;
+    } else {
+      hashMap[num] = 1;
+    }
+  }
+
+  let arr = Object.entries(hashMap);
+  arr.sort((a, b) => {
+    return b[1] - a[1];
+  });
+  arr.slice(0, k).forEach((element) => result.push(+element[0]));
+  return result;
 };
 console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2));
+
+/// 69.Sum of Two Integers
+var getSum = function (a, b) {
+  let arr = [];
+  for (let i = 0; i < a; i++) {
+    arr.push(1);
+  }
+  for (let i = 0; i < b; i++) {
+    arr.push(1);
+  }
+  return arr.length;
+};
+console.log(getSum(2, 3));
+
+/// 71.Longest Repeating Character Replacement
+var characterReplacement = function (s, k) {
+  const map = {};
+  let max = 0;
+  let left = 0;
+  let maxCount = 0;
+
+  for (let right = 0; right < s.length; right++) {
+    const c = s[right];
+    map[c] = (map[c] || 0) + 1; ///log>>>{A:4,B:3}
+    maxCount = Math.max(maxCount, map[c]);
+    while (right - left + 1 - maxCount > k) {
+      map[s[left]] -= 1;
+      left += 1;
+    }
+    max = Math.max(max, right - left + 1);
+  }
+  return map;
+};
+console.log(characterReplacement("AABABBA", 1));
