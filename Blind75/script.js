@@ -1384,13 +1384,84 @@ var characterReplacement = function (s, k) {
   for (let right = 0; right < s.length; right++) {
     const c = s[right];
     map[c] = (map[c] || 0) + 1; ///log>>>{A:4,B:3}
-    maxCount = Math.max(maxCount, map[c]);
+    maxCount = Math.max(maxCount, map[c]); ///log>>>4
     while (right - left + 1 - maxCount > k) {
       map[s[left]] -= 1;
       left += 1;
     }
     max = Math.max(max, right - left + 1);
   }
-  return map;
+  return maxCount;
 };
 console.log(characterReplacement("AABABBA", 1));
+
+//// 72.Non-overlapping Intervals
+var eraseOverlapIntervals = function (intervals) {
+  if (intervals.every((v) => v === intervals[0])) {
+    return intervals.length - 1;
+  }
+  let arr = [];
+  for (let i = 0; i < intervals.length; i++) {
+    if (
+      intervals[i][0] + 1 === intervals[i + 1][0] + 1 &&
+      intervals[i][1] + 1 === intervals[i + 1][1] + 1
+    ) {
+      return 0;
+    }
+    return arr.push(intervals[i + 1]);
+  }
+};
+console.log(
+  eraseOverlapIntervals([
+    [1, 2],
+    [2, 3],
+    [3, 4],
+    [1, 3],
+  ])
+);
+
+/// 73.Serialize and Deserialize BST
+var serialize = function (root) {
+  let data = [];
+  for (let i = 0; i < root.length; i++) {
+    data.push(root[i].toString());
+  }
+  return data;
+};
+var deserialize = function (data) {
+  const arr = data.map((str) => {
+    return Number(str);
+  });
+  return arr;
+};
+console.log(deserialize([2, 1, 3]));
+
+/// 75.Palindromic Substrings
+var countSubstrings = function (s) {
+  let result = [];
+  let arr = s.split("").sort();
+  if (arr.every((v, i, self) => self.indexOf(v) === i)) {
+    return arr.length;
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === arr[i + 1]) {
+      result.push(arr[i]);
+    }
+  }
+  return result.length + arr.length;
+};
+console.log(countSubstrings("aba"));
+
+///76.Longest Common Subsequence
+var longestCommonSubsequence = function (text1, text2) {
+  let main = text1.split("");
+  let sub = text2.split("");
+  let sum = 0;
+  for (let i = 0; i < sub.length; i++) {
+    if (main.includes(sub[i]) == true) {
+      sum++;
+    }
+  }
+  return sum;
+};
+console.log(longestCommonSubsequence("abcde", "ace"));
