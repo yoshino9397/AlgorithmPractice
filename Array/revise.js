@@ -136,4 +136,102 @@ var reverseList = function (head) {
   }
   return head.reverse();
 };
-console.log(reverseList([1,2,3,4,5]));
+console.log(reverseList([1, 2, 3, 4, 5]));
+
+/// 50.Contains Duplicate
+var containsDuplicate = function (nums) {
+  let arr = nums.sort((a, b) => a - b);
+  let num = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (nums[i] === nums[i + 1]) {
+      num++;
+    }
+  }
+  if (num > 0) {
+    return true;
+  }
+  return false;
+};
+console.log(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2]));
+
+/// 51.Invert Binary Tree
+var invertTree = function (root) {
+  if (root === null) {
+    return root;
+  }
+  let tmp = root.left;
+  root.left = root.right;
+  root.right = tmp;
+
+  invertTree(root.left);
+  invertTree(root.right);
+  return root;
+};
+
+/// 53.Lowest Common Ancestor of a Binary Search Tree
+var lowestCommonAncestor = function (root, p, q) {
+  if (root === null) {
+    return root;
+  }
+
+  if (root === p || root === q) {
+    return root;
+  }
+  if (
+    (root.val >= p.val && root.val <= q.val) ||
+    (root.val <= p.val && root.val >= q.val)
+  ) {
+    return root;
+  }
+
+  if (root.val > p.val && root.val > q.val) {
+    return lowestCommonAncestor(root.left, p, q);
+  } else {
+    return lowestCommonAncestor(root.right, p, q);
+  }
+};
+
+/// 60.Missing Number
+var missingNumber = function (nums) {
+  let arr = nums.sort((a, b) => a - b);
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] + 1 != arr[i + 1]) {
+      return arr[i] + 1;
+    }
+  }
+  return arr[arr.length - 1] + 1;
+};
+console.log(missingNumber([3, 0, 1]));
+
+/// 67.Counting Bits
+var countBits = function (n) {
+  var ans = [0];
+  for (let i = 1; i <= n; i++) {
+    ans[i] = ans[i & (i - 1)] + 1;
+    ////ビット論理積 (&)
+  }
+  return ans;
+};
+console.log(countBits(3));
+
+/// 74.Subtree of Another Tree
+var isSubtree = function (root, subRoot) {
+  if (root == null) {
+    return false;
+  }
+  if (isSameTree(root, subRoot)) {
+    return true;
+  }
+  return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+};
+
+const isSameTree = function (root, subRoot) {
+  if (root && subRoot) {
+    return (
+      root.val === subRoot.val &&
+      isSameTree(root.left, subRoot.left) &&
+      isSameTree(root.right, subRoot.right)
+    );
+  }
+  return root === subRoot;
+};
