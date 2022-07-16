@@ -119,4 +119,21 @@ var reverseBits = function (n) {
 };
 console.log(reverseBits("00000010100101000001111010011100"));
 
+/// 41.Number of 1 Bits
+var hammingWeight = function (n) {
+  let sum = 0;
+  for (let i = 0; i < n.length; i++) {
+    sum += parseFloat(n[i]);
+  }
+  return sum;
+};
+console.log(hammingWeight("00000000000000000000000000001011"));
 
+// 44. Reverse Linked List
+var reverseList = function (head) {
+  if (head === null) {
+    return [];
+  }
+  return head.reverse();
+};
+console.log(reverseList([1,2,3,4,5]));
