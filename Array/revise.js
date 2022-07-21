@@ -219,19 +219,64 @@ var isSubtree = function (root, subRoot) {
   if (root == null) {
     return false;
   }
-  if (isSameTree(root, subRoot)) {
+  if (isSameTree1(root, subRoot)) {
     return true;
   }
   return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
 };
 
-const isSameTree = function (root, subRoot) {
+const isSameTree1 = function (root, subRoot) {
   if (root && subRoot) {
     return (
       root.val === subRoot.val &&
-      isSameTree(root.left, subRoot.left) &&
-      isSameTree(root.right, subRoot.right)
+      isSameTree1(root.left, subRoot.left) &&
+      isSameTree1(root.right, subRoot.right)
     );
   }
   return root === subRoot;
 };
+
+//////////////////////////////////////// medium ////////////////////////////////////////
+
+// 3. Longest Substring Without Repeating Characters
+var lengthOfLongestSubstring = function (s) {
+  let arr = [];
+  for (let i = 0; i < s.length; i++) {
+    if (s.indexOf(s[i], i + 1) !== -1) {
+      arr.push(s.indexOf(s[i], i + 1) - i);
+    }
+  }
+  return arr.sort((a, b) => b - a)[0];
+};
+console.log(lengthOfLongestSubstring("abcabcbb"));
+
+// 4. Longest Palindromic Substring
+var longestPalindrome = function (s) {
+  let arr = [];
+  for (let i = 0; i < s.length; i++) {
+    if (s.indexOf(s[i], i + 1) !== -1) {
+      arr.push({
+        length: s.indexOf(s[i], i + 1) - i + 1,
+        word: s.slice(i, i + (s.indexOf(s[i], i + 1) - i + 1)),
+      });
+    }
+  }
+  return arr.sort((a, b) => b.length - a.length)[0].word;
+};
+console.log(longestPalindrome("cbbd"));
+
+/// 5.3Sum
+var threeSum = function (nums) {
+  let arr = [];
+  let sum = 0;
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i];
+    for (let j = i + 1; j < nums.length; j++) {
+      sum += nums[j];
+      arr.push({ Sum: sum, Num1: nums[i], Num2: nums[j] });
+      sum = 0;
+    }
+  }
+  return arr;
+};
+console.log(threeSum([-1, 0, 1, 2, -1, -4]));
