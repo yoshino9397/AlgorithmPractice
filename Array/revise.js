@@ -267,16 +267,103 @@ console.log(longestPalindrome("cbbd"));
 
 /// 5.3Sum
 var threeSum = function (nums) {
-  let arr = [];
-  let sum = 0;
-  for (let i = 0; i < nums.length; i++) {
-    sum += nums[i];
-    for (let j = i + 1; j < nums.length; j++) {
-      sum += nums[j];
-      arr.push({ Sum: sum, Num1: nums[i], Num2: nums[j] });
-      sum = 0;
+  let result = [];
+  nums.sort((a, b) => {
+    return a - b;
+  });
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    var target = 0 - nums[i];
+
+    j = i + 1;
+    k = nums.length - 1;
+
+    while (j < k) {
+      if (nums[j] + nums[k] === target) {
+        result.push([nums[i], nums[j], nums[k]]);
+        j++;
+        k--;
+        while (j < k && nums[j] === nums[j - 1]) {
+          j++;
+        }
+        while (j < k && nums[k] === nums[k + 1]) {
+          k--;
+        }
+      } else if (nums[j] + nums[k] < target) {
+        j++;
+      } else {
+        k--;
+      }
     }
   }
-  return arr;
+  return result;
 };
 console.log(threeSum([-1, 0, 1, 2, -1, -4]));
+
+/// 6.Remove Nth Node From End of List
+var removeNthFromEnd = function (head, n) {
+  let arr = [];
+  arr.push(head.slice(0, n + 1));
+  arr.push(head.slice(head.length - n + 1));
+  return arr.flat();
+};
+console.log(removeNthFromEnd([1, 2, 3, 4, 5], 2));
+
+///10.Search in Rotated Sorted Array
+var search = function (nums, target) {
+  if (nums.includes(target) == false) {
+    return -1;
+  } else {
+    let num = nums.indexOf(target);
+    return num;
+  }
+};
+console.log(search([4, 5, 6, 7, 0, 1, 2], 0));
+
+/// 11.Combination Sum
+var combinationSum = function (candidates, target) {
+  let res = [];
+  dfsTraversal(candidates, 0, target, [], res);
+  return res;
+};
+
+const dfsTraversal = (candidates, startIdx, remaining, curPath, res) => {
+  if (remaining === 0) {
+    res.push(curPath.slice());
+  }
+  for (let i = startIdx; i < candidates.length; i++) {
+    if (remaining - candidates[i] >= 0) {
+      curPath.push(candidates[i]);
+      dfsTraversal(candidates, i, remaining - candidates[i], curPath, res);
+      curPath.pop();
+    }
+  }
+};
+console.log(combinationSum([2, 3, 6, 7], 7));
+
+/// 12.Rotate Image
+var rotate = function (matrix) {
+  let rev = matrix.reverse();
+  let arr = [];
+  let result = [];
+
+  let j = 0;
+  for (let k = 0; k < rev.length; k++) {
+    for (let i = 0; i < rev.length; i++) {
+      arr.push(rev[i][j]);
+    }
+    j++;
+  }
+  for (let i = 0; i < rev.length; i++) {
+    result.push([arr.slice(i * rev.length, (i + 1) * rev.length)]);
+  }
+
+  return result;
+};
+console.log(
+  rotate([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+  ])
+);
