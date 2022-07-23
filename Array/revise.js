@@ -367,3 +367,94 @@ console.log(
     [7, 8, 9],
   ])
 );
+
+/// 13.Group Anagrams
+var groupAnagrams = function (strs) {
+  var hash = {};
+
+  if (strs.length === null || strs.length === 1) {
+    return [strs];
+  }
+
+  for (var i = 0; i < strs.length; i++) {
+    var str = strs[i];
+    var key = sort(str);
+
+    hash[key] = hash[key] || [];
+    hash[key].push(str);
+  }
+
+  var result = [];
+  for (i in hash) {
+    result.push(hash[i]);
+  }
+  return result;
+};
+
+var sort = function (s) {
+  var arr = s.split("");
+  arr.sort((a, b) => (a > b ? 1 : -1));
+  return arr.join("");
+};
+console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]));
+
+/// 14.Maximum Subarray
+var maxSubArray = function (nums) {
+  let sum = 0;
+  let max = -Infinity;
+
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i];
+    max = Math.max(max, sum);
+    if (sum < 0) {
+      sum = 0;
+    }
+  }
+  return max;
+};
+console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+
+/// 16.Jump Game
+var canJump = function (nums) {
+  var numLeft = nums[0];
+  for (var i = 1; i < nums.length; i++) {
+    numLeft--;
+    if (numLeft < 0) {
+      return false;
+    }
+    numLeft = Math.max(nums[i], numLeft);
+  }
+  return true;
+};
+console.log(canJump([2, 3, 1, 1, 4]));
+
+/// 17.Merge Intervals
+var merge = function (intervals) {
+  let arr = intervals.flat();
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] >= arr[i + 1]) {
+      arr.splice(i, 2);
+    }
+  }
+  for (let i = 0; i <= arr.length / 2 + 1; i = i + 2) {
+    result.push([arr[i], arr[i + 1]]);
+  }
+  return result;
+};
+console.log(
+  merge([
+    [1, 3],
+    [2, 6],
+    [8, 10],
+    [15, 18],
+  ])
+);
+
+/// 18.Insert Interval
+var insert = function(intervals, newInterval) {
+
+
+  
+}
+
