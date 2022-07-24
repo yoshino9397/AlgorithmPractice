@@ -593,10 +593,15 @@ var levelOrder = function (root) {
 };
 console.log(levelOrder([3, 9, 20, null, null, 15, 7]));
 
-/// 29.Construct Binary Tree from Preorder and Inorder Traversal
-var buildTree = function (preorder, inorder) {
-
-
-  
+/// ３３.Longest Consecutive Sequence
+var longestConsecutive = function (nums) {
+  let arr = nums.sort((a, b) => a - b);
+  let sum = 1;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] + 1 === arr[i + 1]) {
+      sum++;
+    }
+  }
+  return sum;
 };
-console.log(buildTree([3, 9, 20, 15, 7], [9, 3, 15, 20, 7]));
+console.log(longestConsecutive([100, 4, 200, 1, 3, 2]));
