@@ -452,9 +452,151 @@ console.log(
 );
 
 /// 18.Insert Interval
-var insert = function(intervals, newInterval) {
+var insert = function (intervals, newInterval) {
+  let result = [];
+  for (let i = 0; i < intervals.length; i++) {
+    if (intervals[i][0] + 1 === newInterval[0]) {
+      intervals.splice(i + 1, 0, newInterval);
+    }
+  }
+
+  let arr = intervals.flat();
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] >= arr[i + 1]) {
+      arr.splice(i, 2);
+    }
+  }
+  for (let i = 0; i < arr.length / 2 + 1; i = i + 2) {
+    result.push([arr[i], arr[i + 1]]);
+  }
+  return result;
+};
+console.log(
+  insert(
+    [
+      [1, 3],
+      [6, 9],
+    ],
+    [2, 5]
+  )
+);
+
+/// 19.Unique Paths
+var uniquePaths = function (m, n) {
+  let m1 = factorial(m - 1);
+  let n1 = factorial(n - 1);
+
+  function factorial(k) {
+    var j = 1;
+    for (var i = 1; i <= k; i++) {
+      j *= i;
+    }
+    return j;
+  }
+  return factorial(m + n - 2) / (m1 * n1);
+};
+console.log(uniquePaths(3, 7));
+
+/// 23.Word Search
+var exist = function (board, word) {
+  var hash = {};
+
+  for (var i = 0; i < board.length; i++) {
+    for (var j = 0; j < board[0].length; j++) {
+      if (dfs(board, word, 0, i, j)) {
+        return true;
+      }
+    }
+  }
+
+  function dfs(board, word, w, i, j) {
+    var key = i + "," + j;
+    if (hash[key]) {
+      return false;
+    }
+    if (w === word.length) {
+      return true;
+    }
+    if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) {
+      return false;
+    }
+
+    var result = false;
+    if (word[w] === board[i][j]) {
+      hash[key] = true;
+
+      result =
+        dfs(board, word, w + 1, i + 1, j) ||
+        dfs(board, word, w + 1, i - 1, j) ||
+        dfs(board, word, w + 1, i, j + 1) ||
+        dfs(board, word, w + 1, i, j - 1);
+
+      hash[key] = false;
+    }
+    return result;
+  }
+  return false;
+};
+console.log(
+  exist(
+    [
+      ["A", "B", "C", "E"],
+      ["S", "F", "C", "S"],
+      ["A", "D", "E", "E"],
+    ],
+    "ABCB"
+  )
+);
+
+/// 25.Validate Binary Search Tree
+var isValidBST = function (root) {
+  if (!root) {
+    return false;
+  }
+
+  const helper = (root, min, max) => {
+    if (!root) {
+      return true;
+    }
+    if (
+      (min !== null && root.val <= min) ||
+      (max !== null && root.val >= max)
+    ) {
+      return false;
+    }
+    return (
+      helper(root.left, min, root.val) && helper(root.right, root.val, max)
+    );
+  };
+  return helper(root, null, null);
+};
+
+///27.Binary Tree Level Order Traversal
+var levelOrder = function (root) {
+  if (root === null) {
+    return [];
+  }
+  if (root.length === 1) {
+    return [root];
+  }
+
+  let result = [[root[0]]];
+  for (let i = 0; i < root.length; i++) {
+    if (root[i] === null) {
+      root.splice(i, 2);
+    }
+  }
+  for (let i = 1; i < root.length; i = i + 2) {
+    result.push([root[i], root[i + 1]]);
+  }
+  return result;
+};
+console.log(levelOrder([3, 9, 20, null, null, 15, 7]));
+
+/// 29.Construct Binary Tree from Preorder and Inorder Traversal
+var buildTree = function (preorder, inorder) {
 
 
   
-}
-
+};
+console.log(buildTree([3, 9, 20, 15, 7], [9, 3, 15, 20, 7]));
