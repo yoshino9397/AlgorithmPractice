@@ -605,3 +605,102 @@ var longestConsecutive = function (nums) {
   return sum;
 };
 console.log(longestConsecutive([100, 4, 200, 1, 3, 2]));
+
+// 35.Word Break
+var wordBreak = function (s, wordDict) {
+  if (wordDict === null || wordDict.size === 0) {
+    return false;
+  }
+  let arr = s.split("");
+  let value = [];
+
+  for (let i = 0; i < wordDict.length; i++) {
+    value.push(wordDict[i].split(""));
+  }
+  for (let i = 0; i < value.length; i++) {
+    arr.splice(arr.indexOf(value[i][0]), value[i].length);
+  }
+
+  let len = value.flat().length;
+  if (!arr || s.length < len) {
+    return false;
+  }
+  return true;
+};
+console.log(wordBreak("leetcode", ["leet", "code"]));
+
+/// 37.Reorder Lists
+var reorderList = function (head) {
+  if (head === null || head.length === 1) {
+    return head;
+  }
+
+  let even = [];
+  let evenresult = [];
+  let odd = [];
+  let oddresult = [];
+
+  if (head.length % 2 === 0) {
+    for (let i = head.length / 2; i < head.length; i++) {
+      even.push(head[i]);
+      head.splice(i, 0);
+    }
+    even.reverse();
+    for (let i = 0; i < even.length; i++) {
+      evenresult.push(head[i]);
+      evenresult.push(even[i]);
+    }
+    return evenresult;
+  }
+
+  if (head.length % 2 !== 0) {
+    for (let i = Math.floor(head.length / 2) + 1; i < head.length; i++) {
+      odd.push(head[i]);
+      head.splice(i, 0);
+    }
+    odd.reverse();
+    for (let i = 0; i < odd.length; i++) {
+      oddresult.push(head[i]);
+      oddresult.push(odd[i]);
+    }
+    oddresult.push(head[Math.floor(head.length / 2)]);
+
+    return oddresult;
+  }
+};
+console.log(reorderList([1, 2, 3, 4]));
+
+/// 38.Maximum Product Subarray
+var maxProduct = function (nums) {
+  let num = 1;
+  let max = -Infinity;
+  for (let i = 0; i < nums.length; i++) {
+    num *= nums[i];
+    max = Math.max(max, num);
+  }
+  return max;
+};
+console.log(maxProduct([2, 3, -2, 4]));
+
+/// 39.Find Minimum in Rotated Sorted Array
+var findMin = function (nums) {
+  let arr = nums.sort((a, b) => a - b);
+  return arr[0];
+};
+console.log(findMin([3, 4, 5, 1, 2]));
+
+// 42.House Robber
+var rob = function (nums) {
+  let arr = [];
+
+  for (let i = 0; i < Math.ceil(nums.length / 2); i++) {
+    let sum = nums[i] + nums[i + 2];
+    arr.push(sum);
+  }
+  return arr.sort((a, b) => b - a)[0];
+};
+console.log(rob([1, 2, 3, 1]));
+
+/// 45.Course Schedule
+var canFinish = function (numCourses, prerequisites) {};
+console.log(canFinish(2, [[1, 0]]));
