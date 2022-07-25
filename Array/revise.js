@@ -702,5 +702,23 @@ var rob = function (nums) {
 console.log(rob([1, 2, 3, 1]));
 
 /// 45.Course Schedule
-var canFinish = function (numCourses, prerequisites) {};
-console.log(canFinish(2, [[1, 0]]));
+var canFinish = function (numCourses, prerequisites) {
+  for (let i = 0; i < prerequisites.length; i++) {
+    if (prerequisites[i].length !== numCourses) {
+      return false;
+    }
+    if (prerequisites[0].length === numCourses && prerequisites.length === 1) {
+      return true;
+    }
+    if (prerequisites.includes(prerequisites[i].reverse()) === true) {
+      return false;
+    }
+    return true;
+  }
+};
+console.log(
+  canFinish(2, [
+    [1, 0],
+    [0, 1],
+  ])
+);
