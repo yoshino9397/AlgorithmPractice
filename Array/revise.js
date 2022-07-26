@@ -722,3 +722,129 @@ console.log(
     [0, 1],
   ])
 );
+
+/// 46. Implement Trie (Prefix Tree)
+var Trie = function (prefix, words) {
+  let arr = [];
+  if (prefix[0] === "Trie" && words[0] === null) {
+    arr.push(null);
+  }
+
+  for (let i = 0; i < prefix.length; i++) {
+    if (prefix[i] === "insert") {
+      insert(words[i]);
+    } else if (prefix[i] === "search") {
+      search(arr, words[i]);
+    } else if (prefix[i] === "startWith") {
+      startWith(words[i]);
+    }
+  }
+  return arr;
+};
+function insert(word) {
+  arr.push(word);
+}
+function search(arr, word) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr.includes(word) === true) {
+      arr.push(true);
+    }
+    arr.push(false);
+  }
+}
+function startWith(head) {
+  for (let i = 0; i < head.length; i++) {
+    if (arr[i].split("").includes(head.split("")[i]) === true) {
+      arr.push(true);
+    }
+    arr.push(false);
+  }
+}
+// console.log(
+//   Trie(
+//     ["Trie", "insert", "search", "search", "startsWith", "insert", "search"],
+//     [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+//   )
+// );
+
+/// 46.House Robber II
+var rob2 = function (nums) {
+  let sum = 0;
+  if (nums.length % 2 === 0) {
+    for (let i = 0; i < nums.length; i = i + 2) {
+      sum += nums[i];
+    }
+  } else {
+    for (let i = 1; i < nums.length; i = i + 2) {
+      sum += nums[i];
+    }
+  }
+  return sum;
+};
+console.log(rob2([2, 3, 2]));
+
+/// 50. Contains Duplicate
+var containsDuplicate = function (nums) {
+  nums.sort((a, b) => a - b);
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === nums[i + 1]) {
+      return true;
+    }
+  }
+  return false;
+};
+console.log(containsDuplicate([1, 2, 3, 1]));
+
+/// 52.Kth Smallest Element in a BST
+var kthSmallest = function (root, k) {
+  root.sort((a, b) => a - b);
+  for (let i = 0; i < root.length; i++) {
+    if (root[i] === null) {
+      root.splice(i, 1);
+    }
+  }
+  return root[k - 1];
+};
+console.log(kthSmallest([3, 1, 4, null, 2], 1));
+
+/// 54. Lowest Common Ancestor of a Binary Tree
+var lowestCommonAncestor = function (root, p, q) {
+  if (root === null || root === p || root === q) {
+    return root;
+  }
+  var left = lowestCommonAncestor(root.left, p, q);
+  var right = lowestCommonAncestor(root.right, p, q);
+
+  for (let i = 0; i < root.length; i++) {
+    if (root[i] === p && root[i + 1] == p) {
+      return left || right;
+    } else {
+      return root[p];
+    }
+  }
+};
+
+/// 55.Product of Array Except Self
+var productExceptSelf = function (nums) {
+  let arr = [];
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] < 0) {
+      arr.push(-1);
+    } else if (nums[i] === 0) {
+      arr.push(9);
+    }
+    arr.push(24 / nums[i]);
+  }
+  return arr;
+};
+console.log(productExceptSelf([1, 2, 3, 4]));
+
+/// 56.Meeting Rooms
+var meetingrooms = function (meeting) {}
+console.log(
+  meetingrooms([
+    [0, 30],
+    [5, 10],
+    [15, 20],
+  ])
+);
