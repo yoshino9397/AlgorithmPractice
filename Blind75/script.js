@@ -1208,7 +1208,7 @@ console.log(productExceptSelf([1, 2, 3, 4]));
 /// 56.Meeting Rooms
 var meetingrooms = function (meeting) {
   let arr = meeting.flat();
-  let result = meeting.flat().sort((a, b) => a - b);
+  let result = arr.sort((a, b) => a - b);
   if (arr === result) {
     return true;
   }
