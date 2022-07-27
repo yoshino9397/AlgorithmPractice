@@ -840,7 +840,13 @@ var productExceptSelf = function (nums) {
 console.log(productExceptSelf([1, 2, 3, 4]));
 
 /// 56.Meeting Rooms
-var meetingrooms = function (meeting) {}
+var meetingrooms = function (meeting) {
+  let result = meeting.flat().sort((a, b) => a - b);
+  if (result === meeting.flat()) {
+    return true;
+  }
+  return false;
+};
 console.log(
   meetingrooms([
     [0, 30],
@@ -848,3 +854,72 @@ console.log(
     [15, 20],
   ])
 );
+
+/// 59.Graph Valid Tree
+var validtree = function (n, edges) {
+  if (edges.length > n - 1) {
+    return false;
+  }
+  for (let i = 0; i < edges.length; i++) {
+    if (edges[i][0] > edges[i + 1][0]) {
+      return false;
+    }
+    return true;
+  }
+};
+console.log(
+  validtree(5, [
+    [0, 1],
+    [0, 2],
+    [0, 3],
+    [1, 4],
+  ])
+);
+
+/// 62.Encode and Decode Strings
+var encode = function (words) {
+  let word = words.toString();
+  let encode = encodeURI(word);
+  let decode = decodeURI(encode);
+  return decode;
+};
+console.log(encode(["lint", "code", "love", "you"]));
+
+/// 64.Longest Increasing Subsequence
+var lengthOfLIS = function (nums) {
+  let sum = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === nums[i + 1]) {
+      sum === 1;
+    } else if (nums[i] <= nums[i + 1]) {
+      sum++;
+    }
+  }
+  return sum + 1;
+};
+console.log(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]));
+
+/// 65.Coin Change
+var coinChange = function (coins, amount) {
+  let dp = [0];
+  for (let i = 1; i <= amount; i++) {
+    dp.push(-1);
+  }
+
+  for (let i = 0; i < amount; i++) {
+    if (dp[i] < 0) {
+      continue;
+    }
+    for (let j = 0; j < coins.length; j++) {
+      let coin = coins[j];
+      if (i + coin > amount) {
+        continue;
+      }
+      if (dp[i + coin] < 0) {
+        dp[i + coin] = dp[i] + 1;
+      }
+    }
+  }
+  return dp[amount];
+};
+console.log(coinChange([1, 2, 5], 11));
