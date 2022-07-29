@@ -1000,8 +1000,64 @@ var eraseOverlapIntervals = function (intervals) {
 console.log(
   eraseOverlapIntervals([
     [1, 2],
-    [2, 3],
-    [3, 4],
-    [1, 3],
+    [1, 2],
+    [1, 2],
   ])
 );
+
+/// 73.Serialize and Deserialize BST
+var serialize = function (root) {
+  let data = [];
+  for (let i = 0; i < root.length; i++) {
+    data.push(root[i].toString());
+  }
+  return data;
+};
+var deserialize = function (data) {
+  const arr = data.map((val) => {
+    return Number(val);
+  });
+  return arr;
+};
+console.log(deserialize([2, 1, 3]));
+
+/// 75.Palindromic Substrings
+var countSubstrings = function (s) {
+  let hash = {};
+
+  for (let num of s) {
+    if (hash[num]) {
+      hash[num]++;
+    } else {
+      hash[num] = 1;
+    }
+  }
+  let arr = Object.entries(hash);
+  arr.sort((a, b) => {
+    return b[1] - a[1];
+  });
+
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    while (arr[i][1] > 0) {
+      sum += arr[i][1];
+      arr[i][1]--;
+    }
+  }
+  return sum;
+};
+console.log(countSubstrings("aaa"));
+
+///76.Longest Common Subsequence
+var longestCommonSubsequence = function (text1, text2) {
+  let main = text1.split("");
+  let sub = text2.split("");
+  let sum = 0;
+  for (let i = 0; i < sub.length; i++) {
+    if (main.includes(sub[i]) == true) {
+      sum++;
+    }
+  }
+  return sum;
+};
+console.log(longestCommonSubsequence("abcde", "ace"));
