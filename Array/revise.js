@@ -849,9 +849,9 @@ var meetingrooms = function (meeting) {
 };
 console.log(
   meetingrooms([
-    [0, 30],
+    [0, 20],
     [5, 10],
-    [15, 20],
+    [15, 40],
   ])
 );
 
